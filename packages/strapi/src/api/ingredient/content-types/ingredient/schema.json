@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredients",
+  "info": {
+    "singularName": "ingredient",
+    "pluralName": "ingredients",
+    "displayName": "Ingredients"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ingredients_name": {
+      "type": "string"
+    },
+    "ingredients_slug": {
+      "type": "uid",
+      "targetField": "ingredients_name"
+    }
+  }
+}

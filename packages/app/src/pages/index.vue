@@ -1,18 +1,25 @@
 <script lang="ts" setup>
+import type { IStrapiRecipe } from '~/models/search.model';
+import RecipeListElement from '~/components/RecipeListElement.vue';
+
+const { find } = useStrapi()
+const recipes = ref<any[]>([])
+
+
+
+onMounted(() => {
+  find<IStrapiRecipe>('Recipes')
+  .then((res) => {
+    console.log(res)
+    recipes.value = res.data
+  })
+  .catch(err => console.error(err))
+})
+
 </script>
 
 <template>
-  <div class="container">
-    <div class="flex flex-col items-center gap-y-4">
-      <h1>Démarrage Nuxt Strapi</h1>
-      <div class="flex gap-x-4">
-        <NuxtLink to="/start">
-          Documentation
-        </NuxtLink>
-        <NuxtLink to="/exemple-recherche">
-          Exemple de recherche
-        </NuxtLink>
-      </div>
-    </div>
+  <div class="border-1 border-solid border-slate-950 rounded-md p-12 w-90% flex items-center justify-start">
+    <RecipeListElement v-for="recipe in recipes" :key="recipe.id" :recipe="recipe"/>
   </div>
 </template>
